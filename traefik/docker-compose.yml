@@ -27,7 +27,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
       - "traefik.http.routers.traefik.rule=Host(`traefik.nestgit.com`)"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:025432190Tr%"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$w9kleJZW$$ZxjH1/kTW7bDmyBP0Jc3x."
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
