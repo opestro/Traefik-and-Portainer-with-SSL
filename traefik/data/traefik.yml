@@ -22,6 +22,7 @@ providers:
 certificatesResolvers:
   cloudflare:
     acme:
+    # PAST YOUR EMAIL THAT IS LINKED  WITH CLOUDFLARE : 
       email: mahdiharzallah21@gmail.com
       storage: acme.json
       dnsChallenge:

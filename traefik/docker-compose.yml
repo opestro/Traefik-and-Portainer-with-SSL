@@ -13,10 +13,10 @@ services:
       - 80:80
       - 443:443
     environment:
-      #- CF_DNS_API_TOKEN=YOUR_API_TOKEN
+      - CF_DNS_API_TOKEN=YOUR_API_TOKEN
       # If you choose to use an API Key instead of a Token, specify your email as well
-      - CF_API_EMAIL=mehdi@swellty.com
-      - CF_API_KEY=ac0b120f6fa20e5a08435a606e13e59c00f1a
+      # CF_API_EMAIL=mehdi@swellty.com
+      # CF_API_KEY=ac0b120f6fa20e5a********c00f1a
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -26,16 +26,24 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
+      # NOW YOU NEED TO SETUP A DOMAIN OR SUB DOAMIN DNS WITH YOUR IP AND WRITE IT BELOW : 
       - "traefik.http.routers.traefik.rule=Host(`traefik.nestgit.com`)"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$w9kleJZW$$ZxjH1/kTW7bDmyBP0Jc3x."
+      # NOW YOU NEED TO USE HASHED PASSWORD : 
+      # $ sudo apt update
+      # $ sudo apt install apache2-utils
+      # $ echo $(htpasswd -nb "<USER>" "<PASSWORD>") | sed -e s/\\$/\\$\\$/g
+      # Paste the output in line below (traefik.http.middlewares.traefik-auth.basicauth.users=<USER>:<HASHED-PASSWORD>)
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
       - "traefik.http.routers.traefik-secure.entrypoints=https"
+      # NOW YOU NEED TO SETUP A DOMAIN OR SUB DOAMIN DNS WITH YOUR IP AND WRITE IT BELOW : 
       - "traefik.http.routers.traefik-secure.rule=Host(`traefik.nestgit.com`)"
       - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
       - "traefik.http.routers.traefik-secure.tls=true"
       - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      # NOW YOU NEED TO SETUP MAIN DOMAIN AND WILDCARD SUB DOAMIN LOOKS LIKE THIS: 
       - "traefik.http.routers.traefik-secure.tls.domains[0].main=nestgit.com"
       - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.nestgit.com"
       - "traefik.http.routers.traefik-secure.service=api@internal"
