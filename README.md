@@ -1,6 +1,6 @@
-# Traefik and Portainer with SSL
+# Traefik and Portainer with SSL (CloudFlare) - inside Docker on A VPS LINUX
 
-This repository contains setup instructions to secure your internal and external services using SSL. We will use Traefik as a reverse proxy and Portainer for container management, with wildcard certificates from Let's Encrypt.
+This repository contains setup instructions to secure your internal and external services using SSL. We will use Traefik as a reverse proxy and Portainer for container management, with wildcard certificates from Let's Encrypt (CloudFlare) .
 
 ## Prerequisites
 
