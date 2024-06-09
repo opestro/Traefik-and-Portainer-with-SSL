@@ -4,37 +4,25 @@ This repository contains setup instructions to secure your internal and external
 
 ## Prerequisites
 
+- Ubuntu 22.04
 - Docker
 - Docker Compose
 
 ## Traefik Setup
 
-1. Create necessary directories and files:
+1. Prepare files: Don't forget to change the configuration inside those files
 
     ```bash
-    mkdir -p traefik/data
     cd traefik/data
-    touch acme.json
     chmod 600 acme.json
-    touch traefik.yml
     ```
 
 2. Create a Docker network:
 
     ```bash
     docker network create proxy
-    ```
 
-3. Create `docker-compose.yml`:
-
-    ```bash
-    cd ..
-    touch docker-compose.yml
-    ```
-
-    - Refer to [Traefik GitHub](https://github.com/technotim/traefik-docker) for the content of `traefik.yml` and `docker-compose.yml`.
-
-4. Start Traefik:
+3. Start Traefik work-dir : /treafik (change the configuration inside the `docker-compose.yml`)
 
     ```bash
     docker-compose up -d
@@ -42,17 +30,7 @@ This repository contains setup instructions to secure your internal and external
 
 ## Portainer Setup
 
-1. Create necessary directories and files:
-
-    ```bash
-    mkdir -p portainer/data
-    cd portainer
-    touch docker-compose.yml
-    ```
-
-    - Refer to [Portainer GitHub](https://github.com/technotim/traefik-docker) for the content of `docker-compose.yml`.
-
-2. Generate a basic auth password:
+1. Generate a basic auth password:
 
     ```bash
     sudo apt update
@@ -62,15 +40,15 @@ This repository contains setup instructions to secure your internal and external
 
     Replace `<USER>` and `<PASSWORD>` with your desired username and password.
 
-3. Add the hashed password to your `docker-compose.yml` in the Portainer service definition.
+2. Add the hashed password to your `docker-compose.yml` in the Portainer service definition.
 
-4. Start Portainer:
+3. Start Portainer work-dir : /portainer (change the configuration inside the `docker-compose.yml`)
 
     ```bash
     docker-compose up -d
     ```
 
-## Traefik Routes Configuration
+## EXTRA (optional) :Traefik Routes Configuration
 
 1. Create and edit `config.yml`:
 
